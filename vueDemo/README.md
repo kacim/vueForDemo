@@ -1,4 +1,5 @@
 # vue-manage-system #
+这是在原作者的项目上加了基础功能（接口封装等）给公司员工学习vue的用法和自定义组件构造用的新例子所以原作者的介绍我照搬不改动
 基于Vue.js 2.x系列 + Element UI 的后台管理系统解决方案。[线上地址](http://blog.gdfengshuo.com/example/work/)
 
 [English document](https://github.com/lin-xin/manage-system/blob/master/README_EN.md)
@@ -6,7 +7,7 @@
 [更新日志](https://github.com/lin-xin/vue-manage-system/releases)
 
 ## 赞赏
-请作者喝杯咖啡吧！
+请作者喝杯咖啡吧！这个作者的demo确实好你们学习完可以请他喝咖啡
 
 ![微信扫一扫](http://blog.gdfengshuo.com/images/weixin.jpg)
 
@@ -34,6 +35,7 @@
 - [x] 三级菜单
 - [x] 自定义图标
 - [x] 可拖拽弹窗
+- [x] new 新增学习用test 模块
 
 ## 安装步骤 ##
 
