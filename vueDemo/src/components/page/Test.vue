@@ -1,5 +1,13 @@
 <template>
     <div>
+        <el-row :gutter="20">
+            <el-col v-for="nameItem in testList" :span="6" @click.native="testCancel(nameItem.index)" class="inline">
+                <div class="grid-content bg-purple">{{nameItem.name}}</div>
+            </el-col>
+        </el-row>
+        <el-checkbox-group v-model="checkedCities">
+            <el-checkbox v-for="(city,index) in cities" :label="index" :key="city" @change="testCheck(city,index)">{{city}}</el-checkbox>
+        </el-checkbox-group>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="活动名称" prop="name" required>
                 <el-input v-model="ruleForm.name"></el-input>
@@ -67,18 +75,22 @@
         <el-button @click='showToast'>默认按钮</el-button>
         <el-row>
             <el-col :span="24">
-                <tools :text='testWord' :ppo='testppo' :isShow='show' v-on:listenTo='showMsg' @alert1='showAlert' ></tools>
+                <tools :text='testWord' :ppo='testppo' :isShow='show' v-on:listenTo='showMsg' @alert1='showAlert'></tools>
             </el-col>
         </el-row>
     </div>
 </template>
 <script>
 import tools from '../common/Tools.vue';
+let cityOptions = ['上海', '北京', '广州', '深圳'];
+var alist;
 export default {
-
     name: 'test',
     data() {
         return {
+            testList: [],
+            checkedCities: [],
+            cities: cityOptions,
             testppo: 'ppo',
             testWord: 'testsss',
             show: true,
@@ -122,6 +134,36 @@ export default {
         tools
     },
     methods: {
+        testCancel(indexs) {
+            let newChangeList = new Array();
+            let checkList = this.testList;
+            console.info('index='+indexs)
+            this.checkedCities = [];
+            if (checkList.length == 1) {
+                this.testList = '';
+            } else {
+                for (var i = 0; i < checkList.length; i++) {
+                    console.info(checkList[i].index)
+                    
+                    if (checkList[i].index != indexs) {
+                        let indexb = checkList[i].index
+                        newChangeList.push({ 'name': cityOptions[indexb], 'index': indexb })
+                        this.checkedCities.push(indexb)
+                    }
+                }
+                this.testList = newChangeList;
+            }
+        },
+        testCheck(name, index) {
+            alist = new Array();
+            var list = this.checkedCities;
+            for (var i = 0; i < list.length; i++) {
+                var indexv = list[i]
+                alist.push({ 'name': cityOptions[indexv], 'index': list[i] })
+            }
+            this.testList = alist;
+        },
+
         showToast() {
             this.$tool(); //现在就可以调用了
         },
@@ -132,11 +174,11 @@ export default {
             alert('fu')
         },
         submitForm(formName) {
-           console.info(this.ruleForm)
+            console.info(this.ruleForm)
             this.$refs.ruleForm.validate((valid) => {
                 if (valid) {
                     alert('submit!');
-                     alert(this.ruleForm.type);
+                    alert(this.ruleForm.type);
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -151,7 +193,20 @@ export default {
     }
 }
 </script>
-<style>
+<style lang='scss'>
+.inline {
+    div {
+        color: white;
+        text-align: center;
+        line-height: 35px;
+
+        &:hover {
+            background: #666;
+        }
+    }
+
+}
+
 .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;
@@ -166,5 +221,40 @@ export default {
 
 .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
+}
+
+.el-row {
+    margin-bottom: 20px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.el-col {
+    border-radius: 4px;
+}
+
+.bg-purple-dark {
+    background: #99a9bf;
+}
+
+.bg-purple {
+    background: #d3dce6;
+}
+
+.bg-purple-light {
+    background: #e5e9f2;
+}
+
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+    cursor: pointer;
+}
+
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
 }
 </style>
