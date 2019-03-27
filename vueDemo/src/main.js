@@ -5,6 +5,7 @@ import axios from 'axios';
 import ElementUI from 'element-ui';
 import global from './components/common/common.vue';
 import tool from './components/common/Tools.vue';
+import store from './store';
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import './assets/css/icon.css';
@@ -44,5 +45,6 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
     router,
+    store,
     render: h => h(App)
 }).$mount('#app')

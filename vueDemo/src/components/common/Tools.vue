@@ -1,19 +1,33 @@
 <template>
-      <div class="toast" v-if="isShow">
+    <div class="toast" v-if="isShow">
         <div class="toast-div">{{ text }}{{ppo}}</div>
         <el-button @click='sendMsgToParent'>默认按钮</el-button>
         <el-button @click='alert1'>测试按钮</el-button>
-        <el-button @click=''>测试按钮2</el-button>
+        <el-button @click="showTalion">测试按钮2</el-button>
+        <el-button @click="testForYour(0)">看这</el-button>
+        <el-button @click="testForYour(1)">看这2</el-button>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            duration: 1500
+            duration: 1500,
+            ids:789,
+            ids2:890
         }
     },
     methods: {
+        
+        testForYour:function(data){
+            if(data == 0){
+                this.$emit('testGet', this.ids)
+            }else{
+                 this.$emit('testGet', this.ids2)
+            }
+
+            
+        },
 
         sendMsgToParent: function() {
             this.$emit('listenTo', 'hi hello')
@@ -21,10 +35,10 @@ export default {
         },
         alert1: function() {
             this.$emit('alert1', 'hi alert')
-            alert(111)
+        },
+        showTalion: function() {
+            this.$emit('ttt')
         }
-
-
     },
     props: {
 
@@ -53,12 +67,12 @@ export default {
     padding: 0;
 }
 
-.toast-div{
-  color: black;
+.toast-div {
+    color: black;
 }
 
 .toast {
-    color:black;
+    color: black;
     margin-left: 200px;
     width: 400px;
     height: 200px;

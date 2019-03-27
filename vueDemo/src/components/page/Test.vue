@@ -75,7 +75,7 @@
         <el-button @click='showToast'>默认按钮</el-button>
         <el-row>
             <el-col :span="24">
-                <tools :text='testWord' :ppo='testppo' :isShow='show' v-on:listenTo='showMsg' @alert1='showAlert'></tools>
+                <tools :text='testWord' :ppo='testppo' :isShow='show' v-on:listenTo='showMsg' @alert1='showAlert' @ttt="open" @testGet='getDate'></tools>
             </el-col>
         </el-row>
     </div>
@@ -134,17 +134,20 @@ export default {
         tools
     },
     methods: {
+        getDate(date){
+            alert(date)
+        },
         testCancel(indexs) {
             let newChangeList = new Array();
             let checkList = this.testList;
-            console.info('index='+indexs)
+            console.info('index=' + indexs)
             this.checkedCities = [];
             if (checkList.length == 1) {
                 this.testList = '';
             } else {
                 for (var i = 0; i < checkList.length; i++) {
                     console.info(checkList[i].index)
-                    
+
                     if (checkList[i].index != indexs) {
                         let indexb = checkList[i].index
                         newChangeList.push({ 'name': cityOptions[indexb], 'index': indexb })
@@ -163,7 +166,12 @@ export default {
             }
             this.testList = alist;
         },
-
+        open: function() {
+            alert('open')
+        },
+        yourTest: function() {
+            alert('open')
+        },
         showToast() {
             this.$tool(); //现在就可以调用了
         },

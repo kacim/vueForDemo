@@ -20,6 +20,16 @@ export default new Router({
                     meta: { title: '系统首页' }
                 },
                 {
+                   path: '/selectCon',
+                    component: resolve => require(['../components/page/selectCon.vue'], resolve),
+                    meta: { title: '他的自定义图标' }
+                },
+                 {
+                   path: '/store',
+                    component: resolve => require(['../components/page/store.vue'], resolve),
+                    meta: { title: 'store学习' }
+                },
+                {
                     path: '/icon',
                     component: resolve => require(['../components/page/Icon.vue'], resolve),
                     meta: { title: '自定义图标' }

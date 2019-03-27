@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    import bus from '../common/bus';
+    import bus from './bus';
     export default {
         data() {
             return {
@@ -57,6 +57,16 @@
                         icon: 'el-icon-info',
                         index: 'test',
                         title: '测试组件'
+                    },
+                     {
+                        icon: 'el-icon-goods',
+                        index: 'selectCon',
+                        title: '测试组件'
+                    },
+                      {
+                        icon: 'el-icon-search',
+                        index: 'store',
+                        title: 'store测试组件'
                     },
                     {
                         icon: 'el-icon-lx-calendar',
