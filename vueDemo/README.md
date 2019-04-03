@@ -36,7 +36,8 @@ https://github.com/lin-xin/vue-manage-system
 - [x] 自定义图标
 - [x] 可拖拽弹窗
 - [x] new 新增学习用test 模块（form表单以及验证 and 自定义组件的写法以及父子传值常用写法）
-- [x] new common 通用类 已经 接口封装
+- [x] new common 通用类 已经 接口封装 包含通用axios数据接口请求
+- [x] new store 一个关于状态管理的模型
 
 ## 安装步骤 ##
 
