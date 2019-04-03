@@ -1,5 +1,23 @@
 <template>
     <div>
+         <div>同路由参数变化demo</div>
+         <router-link tag="a" :to="{path:'/detailTest',query:{aId:0}}">详情页1</router-link>
+         <router-link tag="a" :to="{path:'/detailTest',query:{aId:1}}">详情页2</router-link>
+        <div>check-box模型</div>
+        <el-table :data="todoList" :show-header="false" height="304" style="width: 100%;font-size:14px;">
+            <el-table-column width="40">
+                <template slot-scope="scope">
+                    <el-checkbox @click.native='showlist' v-model="scope.row.status"></el-checkbox>
+                </template>
+            </el-table-column>
+            <el-table-column>
+                <template slot-scope="scope">
+                    <div class="todo-item" :class="{'todo-item-del': scope.row.status}">{{scope.row.title}}</div>
+                    <div>{{scope.row}}</div>
+                </template>
+            </el-table-column>
+        </el-table>
+        <div>check-box联动</div>
         <el-row :gutter="20">
             <el-col v-for="nameItem in testList" :span="6" @click.native="testCancel(nameItem.index)" class="inline">
                 <div class="grid-content bg-purple">{{nameItem.name}}</div>
@@ -8,6 +26,7 @@
         <el-checkbox-group v-model="checkedCities">
             <el-checkbox v-for="(city,index) in cities" :label="index" :key="city" @change="testCheck(city,index)">{{city}}</el-checkbox>
         </el-checkbox-group>
+        <div>表单以及提交联动</div>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="活动名称" prop="name" required>
                 <el-input v-model="ruleForm.name"></el-input>
@@ -72,16 +91,25 @@
                 </el-carousel-item>
             </el-carousel>
         </div>
-        <el-button @click='showToast'>默认按钮</el-button>
+        <div>移动端适配假设设计图是1080时rem比例1:100</div>
+        <div class='red'></div>
+        <el-button @click='showToast'>隐藏</el-button>
         <el-row>
             <el-col :span="24">
                 <tools :text='testWord' :ppo='testppo' :isShow='show' v-on:listenTo='showMsg' @alert1='showAlert' @ttt="open" @testGet='getDate'></tools>
             </el-col>
         </el-row>
+
     </div>
 </template>
 <script>
 import tools from '../common/Tools.vue';
+import rem from '../common/rem';
+
+rem();
+window.onresize = function(){
+    rem();
+}
 let cityOptions = ['上海', '北京', '广州', '深圳'];
 var alist;
 export default {
@@ -91,8 +119,8 @@ export default {
             testList: [],
             checkedCities: [],
             cities: cityOptions,
-            testppo: 'ppo',
-            testWord: 'testsss',
+            testppo: '传值模型',
+            testWord: '父子组件',
             show: true,
             ruleForm: {
                 name: '',
@@ -127,14 +155,41 @@ export default {
                 desc: [
                     { required: true, message: '请填写活动形式', trigger: 'blur' }
                 ]
-            }
+            },
+            todoList: [{
+                    title: '今天要修复100个bug',
+                    status: false,
+                },
+                {
+                    title: '今天要修复100个bug',
+                    status: false,
+                },
+                {
+                    title: '今天要写100行代码加几个bug吧',
+                    status: false,
+                }, {
+                    title: '今天要修复100个bug',
+                    status: false,
+                },
+                {
+                    title: '今天要修复100个bug',
+                    status: true,
+                },
+                {
+                    title: '今天要写100行代码加几个bug吧',
+                    status: true,
+                }
+            ],
         }
     },
     components: {
         tools
     },
     methods: {
-        getDate(date){
+        showlist(){
+            console.info(this.todoList)
+        },
+        getDate(date) {
             alert(date)
         },
         testCancel(indexs) {
@@ -202,6 +257,17 @@ export default {
 }
 </script>
 <style lang='scss'>
+
+div{
+    font-size: 14px;
+}
+
+.red{
+    width: 1rem;
+    height:1rem;
+    background-color:#fe5453;
+}
+
 .inline {
     div {
         color: white;

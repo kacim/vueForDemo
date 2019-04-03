@@ -16,10 +16,10 @@ export default {
     post(url,param,res,err) {
       axios({
                 method: 'post',
-                url:httpUrl+url,
+                url:url,
                 data: param,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 }
             }).then(res => {
                 return res;

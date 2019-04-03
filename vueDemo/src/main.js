@@ -18,7 +18,6 @@ Vue.use(ElementUI, {
 });
 Vue.prototype.$axios = axios;
 Vue.prototype.COMMON = global;
-
 Vue.prototype.$tool = tool;
 
 //使用钩子函数对路由进行权限跳转

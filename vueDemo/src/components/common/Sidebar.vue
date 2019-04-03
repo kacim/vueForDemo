@@ -58,11 +58,6 @@
                         index: 'test',
                         title: '测试组件'
                     },
-                     {
-                        icon: 'el-icon-goods',
-                        index: 'selectCon',
-                        title: '测试组件'
-                    },
                       {
                         icon: 'el-icon-search',
                         index: 'store',

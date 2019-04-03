@@ -19,10 +19,10 @@ export default new Router({
                     component: resolve => require(['../components/page/Dashboard.vue'], resolve),
                     meta: { title: '系统首页' }
                 },
-                {
-                   path: '/selectCon',
-                    component: resolve => require(['../components/page/selectCon.vue'], resolve),
-                    meta: { title: '他的自定义图标' }
+                 {
+                   path: '/detailTest',
+                    component: resolve => require(['../components/page/detail.vue'], resolve),
+                    meta: { title: '详情页测试' }
                 },
                  {
                    path: '/store',

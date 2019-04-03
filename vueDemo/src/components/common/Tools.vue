@@ -73,15 +73,16 @@ export default {
 
 .toast {
     color: black;
-    margin-left: 200px;
-    width: 400px;
+    margin-left: 300px;
+    width: 500px;
     height: 200px;
     transform: translate(-50%, 0);
-    margin-top: 5rem;
-    line-height: 0.7rem;
+    margin-top: 10px;
+    line-height: 14px;
     color: #FFFFFF;
     padding: 0 0.2rem;
     border-radius: 0.2rem;
     z-index: 10;
+    font-size: 14px;
 }
 </style>
