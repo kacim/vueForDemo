@@ -7,7 +7,9 @@
 
 [更新日志](https://github.com/lin-xin/vue-manage-system/releases)
 
-## 赞赏
+## 
+现项目链接
+http://39.106.54.9:8080/#/login
 原作者项目链接
 https://github.com/lin-xin/vue-manage-system
 
