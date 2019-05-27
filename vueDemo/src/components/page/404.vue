@@ -14,21 +14,21 @@
 export default {
     created() {
 
+          
+        
          // this.$axios.post('http://192.168.49.160/AutoPRViewer/CarsIdAction?method=getCarsId').then((res) => {
          //            console.info(res)
          //            return res.data.list;
          //        })
        
        // let url = 'http://192.168.49.160/AutoPRViewer/CarsIdAction?method=getCarsId';
-       // let params= JSON.stringify({
-       //  name:'name',
-       //  age:['a','b']
-       // })
 
        //接口
-       this.COMMON.post(url,params,res =>{console.info(res)})
-         
+       let s = this.COMMON.post('user/getone',{token: '123'})   
+       console.info(s)
     },
+
+
     methods: {
         goBack() {
             this.$router.go(-1);

@@ -1,48 +1,103 @@
-
-
 <script type="text/javascript">
+const isOnline = true;
+
 import axios from 'axios';
 // 定义一些公共的属性和方法
-const httpUrl = 'http://39.105.17.99:8080/'
+let httpUrl;
+
+if (isOnline)
+    httpUrl = 'http://192.168.49.160:8090/'
+else
+    httpUrl = 'http://39.105.17.99:8080/'
 
 function commonFun() {
+    console.info(httpUrl)
     console.log("公共方法")
 }
 
-// 暴露出这些属性和方法
+axios.interceptors.request.use(config => {
+  // loading
+  return config
+}, error => {
+  return Promise.reject(error)
+})
 
-export default {
-    httpUrl,
-    post(url,param,res,err) {
-      axios({
-                method: 'post',
-                url:url,
-                data: param,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            }).then(res => {
-                return res;
-            }).then(res)
-            .catch(err => {
-                console.log(err);
-            })
-    },
-    get(url,res,param) {
-      axios({
-                method: 'get',
-                url,
-                data: param,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(res => {
-                return res;
-            }).then(res)
-            .catch(err => {
-                console.log(err);
-            })
-    }
+axios.interceptors.response.use(response => {
+  return response
+}, error => {
+  return Promise.resolve(error.response)
+})
 
+function checkStatus (response) {
+  // loading
+  // 如果http状态码正常，则直接返回数据
+  if (response && (response.status === 200 || response.status === 304 || response.status === 400)) {
+    return response
+    // 如果不需要除了data之外的数据，可以直接 return response.data
+  }
+  // 异常状态下，把错误信息返回去
+  return {
+    status: -404,
+    msg: '网络异常'
+  }
 }
+
+function checkCode (res) {
+  // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
+  if (res.status === -404) {
+    alert(res.msg)
+  }
+  if (res.data && (!res.data.success)) {
+    alert(res.data.error_msg)
+  }
+  return res
+}
+
+// 暴露出这些属性和方法
+export default {
+    post(url, data) {
+        return axios({
+            method: 'post',
+            baseURL: httpUrl,
+            url,
+            data: JSON.stringify(data),
+            timeout: 10000,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        }).then(
+            (response) => {
+                return checkStatus(response)
+            }
+        ).then(
+            (res) => {
+                return checkCode(res)
+            }
+        )
+    },
+    get(url, params) {
+        return axios({
+            method: 'get',
+            baseURL: httpUrl,
+            url,
+            params, // get 请求时带的参数
+            timeout: 10000,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        }).then(
+            (response) => {
+                return checkStatus(response)
+            }
+        ).then(
+            (res) => {
+                return checkCode(res)
+            }
+        )
+    }
+}
+
+
+    //         'Content-Type': 'application/json',
 </script>
